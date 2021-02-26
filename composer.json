@@ -1,0 +1,22 @@
+{
+    "name": "normphp-core/dev-doc",
+    "description": "terminal-info",
+    "keywords": ["dev doc","core","normphp"],
+    "homepage": "https://normphp.org/",
+    "authors": [
+        {
+            "name": "pizepei",
+            "email": "pizepei@pizepei.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "repositories": {
+    },
+    "autoload": {
+        "psr-4": {
+            "normphpCore\\devDoc\\": "src/"
+        }
+    }
+}

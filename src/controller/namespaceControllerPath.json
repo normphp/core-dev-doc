@@ -1,0 +1,12 @@
+{
+  "name":"框架应用",
+  "author": "pizepei",
+  "baseAuthGroup": {
+    "document":{
+      "name":"项目文档",
+      "explain": ""
+    }
+  },
+  "constraint": {
+  }
+}
