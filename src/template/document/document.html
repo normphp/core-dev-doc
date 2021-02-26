@@ -33,25 +33,18 @@
         <div class="layui-side-scroll" >
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="nav-filter" id="nav-id">
-
-
-
             </ul>
         </div>
     </div>
-
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;background-color:#F0F0F0;" >
             <fieldset class="layui-elem-field layui-field-title">
                 <legend>API详情</legend>
                 <div class="layui-field-box">
-
                     <div class="layui-row layui-col-space10" id="headTab-id">
                             <!--简单控制器信息-->
                     </div>
-
-
                 </div>
             </fieldset>
 
@@ -64,42 +57,31 @@
                     <div class="layui-tab-item layui-show">
                         <div id="request-table-div">
                             <div id="request-table-path-div">
-                                <table id="request-table-path" lay-filter="test"></table>
+                                <table id="request-table-path" lay-filter="path"></table>
                             </div>
 
                             <div id="request-table-get-div">
-                                <table id="request-table-get" lay-filter="test"></table>
+                                <table id="request-table-get" lay-filter="get"></table>
                             </div>
 
                             <div id="request-table-raw-div">
-                                <table id="request-table-raw" lay-filter="test"></table>
+                                <table id="request-table-raw" lay-filter="div"></table>
                             </div>
 
                             <div id="request-table-post-div">
-                                <table id="request-table-post" lay-filter="test"></table>
+                                <table id="request-table-post" lay-filter="post"></table>
                             </div>
 
                         </div>
                     </div>
                     <div class="layui-tab-item">
-
                         <div id="return-table-div">
-                            <table id="return-table-json" lay-filter="test"></table>
-                            <table id="return-table-xml" lay-filter="test"></table>
-
+                            <table id="return-table-json" lay-filter="json"></table>
+                            <table id="return-table-xml" lay-filter="xml"></table>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
-
-
-
-            <!--<blockquote class="layui-elem-quote">文档内容</blockquote>-->
-
-
         </div>
     </div>
 
@@ -114,21 +96,14 @@
     layui.config({
         base: '{{MODULE_PREFIX}}/document/layui/extends/',
     }).extend({
-        authtree: 'authtree',
     });
-
     //JavaScript代码区域
-    layui.use(['element','table','laytpl','jquery','laytpl', 'authtree',], function(){
+    layui.use(['element','table','laytpl','jquery','laytpl',], function(){
         var element = layui.element,
-        laytpl = layui.laytpl, $ =layui.jquery,laytpl=layui.laytpl, authtree = layui.authtree,
-
+        laytpl = layui.laytpl, $ =layui.jquery,laytpl=layui.laytpl
         table = layui.table;
         // 菜单点击事件
         element.on('nav(nav-filter)', function(elem){
-            // console.log(elem.context.name); //得到当前点击的DOM对象  route
-            // console.log(elem.context.rel); //得到当前点击的DOM对象  父对象
-            // console.log(elem.context.innerText); //得到当前点击的DOM对象
-
             $.ajax({//异步请求返回给后台
                 url:'{{MODULE_PREFIX}}/document/index-nav.json',
                 type:'GET',
@@ -138,7 +113,6 @@
                     // headTabTpl
                     console.log(data); //得到当前点击的DOM对象
                     //这里获取到数据执行显示
-
                     var getTpl = headTabTpl.innerHTML
                         ,view = document.getElementById('headTab-id');
                     laytpl(getTpl).render(data.{{jsonDataName}}, function(html){
@@ -147,7 +121,6 @@
                     });
                     //设置显示逻辑、和亲戚逻辑
                     setTableDivStatus(data,elem);
-
                 }
             });
 
@@ -169,11 +142,7 @@
                 //这里获取到数据执行显示
             }
         });
-
-
     });
-
-
     /**
      * 回车事件
      * @param e
@@ -192,7 +161,6 @@
         layui.use(['element','table','laytpl','jquery'], function(){
             var element = layui.element,
                 laytpl = layui.laytpl, $ = layui.jquery, table = layui.table;
-
             var response = {
                 statusName: 'code' //规定数据状态的字段名称，默认：code
                 ,statusCode: 200 //规定成功的状态码，默认：0
@@ -209,19 +177,17 @@
                 "xml":{'name':"返回参数XML",'id':'return-table-','url':"return-param.json"},
             };
             layui.each(eachData, function(index, item){
-                console.log('#'+item.name+index);
+                console.log('#'+item.id+index);
                 //这里获取到数据执行显示
                 table.render({
                     elem: '#'+item.id+index
                     ,url:'{{MODULE_PREFIX}}/document/'+item.url
                     ,where:{father:elem.context.rel,index:elem.context.name,type:index}
                     ,response: response
-                    // ,toolbar: '#toolbarDemo-get'
                     ,title: elem.context.rel+'-'+elem.context.name+'-'+'get'
                     ,cols: [
                         [ //标题栏
-                            {align: 'center', title: '<span class="layui-badge layui-bg-green">'+item.name+'</span>',width:'100%', colspan: 4}
-                        ],
+                            {align: 'center', title: '<span class="layui-badge layui-bg-green">'+item.name+'</span>',width:'100%', colspan: 4}],
                         [
                             {field: 'field', title: '字段', width:'32%',style:'color:#009688;'}
                             ,{field: 'type', title: '数据类型', width:'10%'}
@@ -231,7 +197,6 @@
                     ]
                     ,page: false
                 });
-
             });
 
         });
