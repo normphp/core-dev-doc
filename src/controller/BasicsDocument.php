@@ -3,8 +3,7 @@
  * Class Deploy
  * @title 閮ㄧ讲鍩虹绫�
  */
-namespace normphp\staging\controller;
-
+namespace normphpCore\devDoc\controller;
 use authority\app\Resource;
 use normphp\staging\Controller;
 use normphp\staging\Request;
