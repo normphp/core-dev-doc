@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>开发助手</title>
-    <link rel="stylesheet" href="{{layui.css}}">
+    <link rel="stylesheet" href="{{local.layui.css}}">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -17,7 +17,7 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+<!--                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">-->
                     PIZEPEI
                 </a>
                 <dl class="layui-nav-child">
@@ -90,9 +90,8 @@
         © pizepei.com - 框架
     </div>
 </div>
-<script src="{{layui.js}}"></script>
+<script src="{{local.layui.js}}"></script>
 <script>
-
     layui.config({
         base: '{{MODULE_PREFIX}}/document/layui/extends/',
     }).extend({

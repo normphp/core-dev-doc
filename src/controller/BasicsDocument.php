@@ -22,8 +22,6 @@ class BasicsDocument extends Controller
         'namespace'=>'',//门面控制器命名空间
         'basePath'=>'/document/',//基础路由
     ];
-
-    protected $path  = '';
     /**
      * @param \normphp\staging\Request $Request
      *      path [object] 路径参数
@@ -37,17 +35,72 @@ class BasicsDocument extends Controller
     public function index(Request $Request)
     {
         $name = $Request->path('type')==='index'?'document':$Request->path('type');
+        $MODULE_PREFIX = \Deploy::MODULE_PREFIX===''?'':'/'.\Deploy::MODULE_PREFIX;
+        $cdn = true;
+        if (gethostbyname('baidu.com') ==='baidu.com'){$cdn =false;}
         $data = [
             '_NAV_'=>self::_NAV_,
-            'layui.css'=>'https://www.layuicdn.com/layui-v2.5.5/css/layui.css',
-            'layui.js'=>'https://www.layuicdn.com/layui-v2.5.5/layui.js',
-            'local.layui.css'=>\Deploy::VIEW_RESOURCE_PREFIX.'/start/layui/css/layui.css',
-            'local.layui.js'=>\Deploy::VIEW_RESOURCE_PREFIX.'/start/layui/layui.js',
-            'MODULE_PREFIX'=>\Deploy::MODULE_PREFIX===''?'':'/'.\Deploy::MODULE_PREFIX,
+            'local.layui.css'=>$cdn?'https://www.layuicdn.com/layui-v2.5.5/css/layui.css':$MODULE_PREFIX.'/document/resource/css/layui.css',
+            'local.layui.js'=>$cdn?'https://www.layuicdn.com/layui-v2.5.5/layui.js':$MODULE_PREFIX.'/document/resource/js/layui.js',
+            'MODULE_PREFIX'=>$MODULE_PREFIX,
             'jsonDataName'=>$this->app->__INIT__['ReturnJsonData'],
         ];
         $path = dirname(__DIR__).DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR.'Document'.DIRECTORY_SEPARATOR;
         return $this->view($name,$data,$path,'html',false);
+    }
+    /**
+     * @Author pizepei
+     * @Created 2019/7/5 22:40
+     * @param \normphp\staging\Request $Request
+     *      path [object]
+     *          name [string] 文件名
+     * @title  获取js
+     * @explain  获取js
+     * @throws \Exception
+     * @return string [js]
+     * @router get resource/js/:name[string].js
+     */
+    public function js(Request $Request)
+    {
+        $path = dirname(__DIR__).DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR.'document'.DIRECTORY_SEPARATOR.'layui'.DIRECTORY_SEPARATOR;
+        if (is_file($path.$Request->path('name').'.js')){return file_get_contents($path.$Request->path('name').'.js');}
+        return '';
+    }
+    /**
+     * @Author pizepei
+     * @Created 2019/7/5 22:40
+     * @param \normphp\staging\Request $Request
+     *      path [object]
+     *          name [string] 文件名
+     * @title  获取css
+     * @explain  获取css
+     * @throws \Exception
+     * @return string [css]
+     * @router get resource/css/:name[string].css
+     */
+    public function css(Request $Request)
+    {
+        $path = dirname(__DIR__).DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR.'document'.DIRECTORY_SEPARATOR.'layui'.DIRECTORY_SEPARATOR;
+        if (is_file($path.$Request->path('name').'.css')){return file_get_contents($path.$Request->path('name').'.css');}
+        return '';
+    }
+    /**
+     * @Author pizepei
+     * @Created 2019/7/5 22:40
+     * @param \normphp\staging\Request $Request
+     *      path [object]
+     *          name [string] 文件名
+     * @title  获取 modules js
+     * @explain  获取 modules js
+     * @throws \Exception
+     * @return string [js]
+     * @router get resource/js/lay/modules/:name[string].js
+     */
+    public function modulesJs(Request $Request)
+    {
+        $path = dirname(__DIR__).DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR.'document'.DIRECTORY_SEPARATOR.'layui'.DIRECTORY_SEPARATOR;
+        if (is_file($path.$Request->path('name').'.js')){return file_get_contents($path.$Request->path('name').'.js');}
+        return '';
     }
     /**
      * @param \normphp\staging\Request $Request html
@@ -331,6 +384,10 @@ class BasicsDocument extends Controller
         ];
         return ['dataStructure'=>$dataStructure,'nav'=>self::_NAV_];
     }
+
+
+
+
     /**
      * 文档中心菜单
      */
