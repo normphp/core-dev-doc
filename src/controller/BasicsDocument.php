@@ -29,7 +29,7 @@ class BasicsDocument extends Controller
      * @return array [html]
      * @title  文档入口（开发助手）
      * @explain 文档入口（API文档、权限文档、公共资源文档）
-     * @router get index/:type[string].html debug:true
+     * @router get :type[string].html debug:true
      * @throws \Exception
      */
     public function index(Request $Request)
@@ -386,16 +386,14 @@ class BasicsDocument extends Controller
     }
 
 
-
-
     /**
      * 文档中心菜单
      */
     const _NAV_ = <<<ABC
-<li class="layui-nav-item"><a href="{{MODULE_PREFIX}}/document/index/document.html">API文档</a></li>
-<li class="layui-nav-item"><a href="{{MODULE_PREFIX}}/document/index/authority.html">权限文档</a></li>
-<li class="layui-nav-item"><a href="{{MODULE_PREFIX}}/document/index/code.html">状态码文档</a></li>
-<li class="layui-nav-item"><a href="{{MODULE_PREFIX}}/document/index/code.html">状态码文档</a></li>
+<li class="layui-nav-item"><a href="{{MODULE_PREFIX}}/document/document.html">API文档</a></li>
+<li class="layui-nav-item"><a href="{{MODULE_PREFIX}}/document/authority.html">权限文档</a></li>
+<li class="layui-nav-item"><a href="{{MODULE_PREFIX}}/document/code.html">状态码文档</a></li>
+<li class="layui-nav-item"><a href="{{MODULE_PREFIX}}/document/code.html">状态码文档</a></li>
 <li class="layui-nav-item">
     <a href="javascript:;">资源文档</a>
     <dl class="layui-nav-child">
