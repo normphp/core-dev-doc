@@ -43,7 +43,7 @@ class BasicsDocument extends Controller
             'local.layui.css'=>$cdn?'https://www.layuicdn.com/layui-v2.5.5/css/layui.css':$MODULE_PREFIX.'/document/resource/css/layui.css',
             'local.layui.js'=>$cdn?'https://www.layuicdn.com/layui-v2.5.5/layui.js':$MODULE_PREFIX.'/document/resource/js/layui.js',
             'MODULE_PREFIX'=>$MODULE_PREFIX,
-            'jsonDataName'=>$this->app->__INIT__['ReturnJsonData'],
+            'jsonDataName'=>$this->app->__INIT__['returnJsonData'],
         ];
         $path = dirname(__DIR__).DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR.'Document'.DIRECTORY_SEPARATOR;
         return $this->view($name,$data,$path,'html',false);
