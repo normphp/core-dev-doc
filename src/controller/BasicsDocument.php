@@ -129,7 +129,7 @@ class BasicsDocument extends Controller
      */
     public function navList()
     {
-        return $this->succeed($this->app->Route()->noteBlock,'',200);
+        return $this->succeed($this->app->Route()->getNoteBlockDocument(),'',200);
     }
     /**
      * @Author pizepei
@@ -160,9 +160,9 @@ class BasicsDocument extends Controller
     public function getNav(Request $Request)
     {
         $input = $Request->input();
-        $fatherInfo = $this->app->Route()->noteBlock[$input['father']]??[];
+        $fatherInfo = $this->app->Route()->getNoteBlockDocument()[$input['father']]??[];
         $fatherInfo['index'] = $input['father'];
-        $info = $this->app->Route()->noteBlock[$input['father']]['route'][$input['index']]??null;
+        $info = $this->app->Route()->getNoteBlockDocument()[$input['father']]['route'][$input['index']]??null;
         if(!empty($info)){
             $info['index'] = $input['index'];
         }
@@ -196,7 +196,7 @@ class BasicsDocument extends Controller
     public function RequestParam(Request $Request)
     {
         $input = $Request->input();
-        $info = $this->app->Route()->noteBlock[$input['father']]['route'][$input['index']]??null;
+        $info = $this->app->Route()->getNoteBlockDocument()[$input['father']]['route'][$input['index']]??null;
         if(!empty($info)){
             $info['index'] = $input['index'];
         }
@@ -234,7 +234,7 @@ class BasicsDocument extends Controller
     public function ReturnParam(Request $Request)
     {
         $input = $Request->input();
-        $info = $this->app->Route()->noteBlock[$input['father']]['route'][$input['index']]??null;
+        $info = $this->app->Route()->getNoteBlockDocument()[$input['father']]['route'][$input['index']]??null;
         if($info['ReturnType'] != $input['type']){
             return $this->succeed([],'获取1'.$input['index'].'成功',200);
         }
